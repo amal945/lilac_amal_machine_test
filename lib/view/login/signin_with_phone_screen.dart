@@ -36,6 +36,34 @@ class SignInWithPhoneScreen extends StatelessWidget {
                     ),
                   ),
                   AppSpacing.height(0.05),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 12.0),
+                    child: Row(
+                      children: [
+                        Text(
+                          "${controller.selectedCountryCode.value}${controller.phoneController.text.trim()}.",
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.black87,
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                           controller.isOtpScreen.value = false;
+                          },
+                          child: Text(
+                            'Edit',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black87,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  AppSpacing.height(0.01),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: List.generate(6, (index) {
