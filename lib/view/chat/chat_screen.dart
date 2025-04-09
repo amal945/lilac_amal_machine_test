@@ -53,11 +53,14 @@ class ChatScreen extends StatelessWidget {
                                     ? "ACTIVE"
                                     : controller.formatTimeAgo(
                                         chatUserData.lastActiveAt!),
-                            style: TextStyle(fontSize: 12, color: chatUserData.isOnline == true
-                                ? Colors.green
-                                : chatUserData.isActive == true
-                                ? Colors.blue
-                                : Colors.grey,),
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: chatUserData.isOnline == true
+                                  ? Colors.green
+                                  : chatUserData.isActive == true
+                                      ? Colors.blue
+                                      : Colors.grey,
+                            ),
                           ),
                           SizedBox(width: 4),
                           CircleAvatar(
@@ -116,10 +119,31 @@ class ChatScreen extends StatelessWidget {
                                   color: isMe ? Colors.white : Colors.black),
                             ),
                           ),
-                          Text(
-                            TimeOfDay.fromDateTime(msg.sentAt).format(context),
-                            style: TextStyle(fontSize: 12, color: Colors.grey),
-                          ),
+                          isMe
+                              ? Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    Text(
+                                      TimeOfDay.fromDateTime(msg.sentAt)
+                                          .format(context),
+                                      style: TextStyle(
+                                          fontSize: 12, color: Colors.grey),
+                                    ),
+                                    SizedBox(
+                                      width: 5,
+                                    ),
+                                    Icon(
+                                      Icons.done_all,
+                                      size: 16,
+                                    )
+                                  ],
+                                )
+                              : Text(
+                                  TimeOfDay.fromDateTime(msg.sentAt)
+                                      .format(context),
+                                  style: TextStyle(
+                                      fontSize: 12, color: Colors.grey),
+                                ),
                         ],
                       ),
                     );
@@ -127,12 +151,12 @@ class ChatScreen extends StatelessWidget {
                 );
               }),
             ),
-
+            Divider(),
             // Input field
             Container(
               padding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
               decoration: BoxDecoration(
-                color: Colors.grey[100],
+                color: Colors.white,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(20),
                   topRight: Radius.circular(20),
@@ -144,23 +168,33 @@ class ChatScreen extends StatelessWidget {
                     child: Container(
                       padding: EdgeInsets.symmetric(horizontal: 16),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: Colors.grey[200],
                         borderRadius: BorderRadius.circular(30),
                         border: Border.all(color: Colors.grey.shade300),
                       ),
                       child: Row(
                         children: [
                           Expanded(
-                            child: TextField(
-                              decoration: InputDecoration(
-                                hintText: "Enter you message",
-                                border: InputBorder.none,
+                            child: Container(
+                              decoration:
+                                  BoxDecoration(color: Colors.grey[200]),
+                              child: TextField(
+                                decoration: InputDecoration(
+                                  hintText: "Enter your message",
+                                  border: InputBorder.none,
+                                ),
                               ),
                             ),
                           ),
                           IconButton(
-                            icon: Icon(Icons.send, color: Colors.redAccent),
-                            onPressed: () {},
+                            icon: Image.asset(
+                              'assets/images/send.png',
+                              width: 24,
+                              height: 24,
+                            ),
+                            onPressed: () {
+                              // Your send logic
+                            },
                           ),
                         ],
                       ),
